@@ -25,7 +25,7 @@ LOG = logging.getLogger(__name__)
 def action_to_str(act, ofctl_action_to_str):
     sub_type = act.subtype
 
-    if sub_type == nicira_ext.NXAST_RESUBMIT:
+    if sub_type == nicira_ext.NXAST_RESUBMIT or sub_type == nicira_ext.NXAST_RESUBMIT_TABLE:
         return 'NX_RESUBMIT: {port: %s, table: %s}' % (act.in_port,
                                                        act.table_id)
 
@@ -114,7 +114,7 @@ def action_to_str(act, ofctl_action_to_str):
                  act.flags,
                  act.table_id,
                  act.fin_idle_timeout,
-                 act.self.fin_hard_timeout,
+                 act.fin_hard_timeout,
                  specs))
 
     elif sub_type == nicira_ext.NXAST_CONJUNCTION:
